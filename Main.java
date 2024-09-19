@@ -6,13 +6,13 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         try {
-            // Inicializa o serviço remoto do Barbeiro
+            // Inicializa o servico remoto do Barbeiro
             Barbeiro barbeiro = new BarbeiroImp();
             LocateRegistry.createRegistry(1099); // Cria o registro RMI na porta padrão (1099)
             Naming.rebind("BarbeiroService", barbeiro);
             System.out.println("BarbeiroService está pronto.");
 
-            // Inicializa a lista de clientes e o serviço de TokenRing
+            // Inicializa a lista de clientes e o servico de TokenRing
             List<Integer> processos = new ArrayList<>();
             for (int i = 0; i < 5; i++) {
                 processos.add(i);

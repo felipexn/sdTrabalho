@@ -19,8 +19,3 @@ Este projeto implementa um sistema distribuído onde múltiplos clientes acessam
 5. **Classe `TokenRing`**: Implementa o controle de posse e passagem do token entre os clientes.
 6. **Classe `Main`**: Inicializa os serviços remotos e inicia os clientes para simular o sistema.
 
-## Como Executar
-
-### 1. Compilar os arquivos Java
-```bash
-javac *.java

@@ -23,17 +23,7 @@ public class Main {
             System.out.println("TokenRingService esta pronto.");
 
             
-            List<Cliente> clientes = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
-                Cliente cliente = new Cliente(i, barbeiro, tokenRing);
-                clientes.add(cliente);
-                cliente.start();
-            }
-
-            //aguarda os clientes terminarem
-            for (Cliente cliente : clientes) {
-                cliente.join();
-            }
+           
 
         } catch (Exception e) {
             e.printStackTrace();

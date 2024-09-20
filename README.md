@@ -12,10 +12,10 @@ Este projeto implementa um sistema distribuído onde múltiplos clientes acessam
 
 ## Estrutura do Projeto
 
-1. **Interface `Barbeiro`**: Define os métodos remotos para cortar cabelo, barba e bigode.
+1. **Interface `BarbeiroInterface`**: Define os métodos remotos para cortar cabelo, barba e bigode.
 2. **Classe `BarbeiroImp`**: Implementa os serviços do barbeiro, simulando o tempo de execução para cada corte.
 3. **Classe `Cliente`**: Cada cliente tenta acessar o barbeiro, aguardando o token para realizar um serviço.
 4. **Interface `TokenRingInterface`**: Define os métodos para verificar e passar o token entre os clientes.
-5. **Classe `TokenRing`**: Implementa o controle de posse e passagem do token entre os clientes.
+5. **Classe `TokenRingImp`**: Implementa o controle de posse e passagem do token entre os clientes.
 6. **Classe `Main`**: Inicializa os serviços remotos e inicia os clientes para simular o sistema.
 

@@ -1,7 +1,7 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class BarbeiroImp extends UnicastRemoteObject implements Barbeiro {
+public class BarbeiroImp extends UnicastRemoteObject implements BarbeiroInterface {
 
     protected BarbeiroImp() throws RemoteException {
         super();

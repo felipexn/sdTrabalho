@@ -2,11 +2,11 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class TokenRing extends UnicastRemoteObject implements TokenRingInterface {
+public class TokenRingImp extends UnicastRemoteObject implements TokenRingInterface {
     private List<Integer> processos;  
     private int indiceDoToken;  
 
-    public TokenRing(List<Integer> processos) throws RemoteException {
+    public TokenRingImp(List<Integer> processos) throws RemoteException {
         this.processos = processos;
         this.indiceDoToken = 0;
     }

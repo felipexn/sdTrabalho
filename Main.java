@@ -6,22 +6,23 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         try {
-            // Inicializa o servico remoto do Barbeiro
-            Barbeiro barbeiro = new BarbeiroImp();
-            LocateRegistry.createRegistry(1099); // Cria o registro RMI na porta padrão (1099)
-            Naming.rebind("BarbeiroService", barbeiro);
+            // inicializa o servico do barbeiro
+            BarbeiroInterface barbeiro = new BarbeiroImp();
+            LocateRegistry.createRegistry(1099); //cria o registro rmi na porta(1099)
+
+            Naming.rebind("rmi://localhost:1099/BarbeiroService", barbeiro);
             System.out.println("BarbeiroService está pronto.");
 
-            // Inicializa a lista de clientes e o servico de TokenRing
             List<Integer> processos = new ArrayList<>();
+
             for (int i = 0; i < 5; i++) {
                 processos.add(i);
             }
-            TokenRing tokenRing = new TokenRing(processos);
-            Naming.rebind("TokenRingService", tokenRing);
-            System.out.println("TokenRingService está pronto.");
+            TokenRingImp tokenRing = new TokenRingImp(processos);
+            Naming.rebind("rmi://localhost:1099/TokenRingService", tokenRing);
+            System.out.println("TokenRingService esta pronto.");
 
-            // Inicializa os clientes
+            
             List<Cliente> clientes = new ArrayList<>();
             for (int i = 0; i < 5; i++) {
                 Cliente cliente = new Cliente(i, barbeiro, tokenRing);
@@ -29,7 +30,7 @@ public class Main {
                 cliente.start();
             }
 
-            // Aguarda os clientes terminarem
+            //aguarda os clientes terminarem
             for (Cliente cliente : clientes) {
                 cliente.join();
             }

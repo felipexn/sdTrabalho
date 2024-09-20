@@ -1,13 +1,14 @@
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 
+
 public class Cliente extends Thread {
     private int idProcesso;
-    private Barbeiro barbeiro;
-    private TokenRing anel;
+    private BarbeiroInterface barbeiro;
+    private TokenRingInterface anel;
     private int servicoAtual = 0; // 0 para cabelo, 1 para barba, 2 para bigode
 
-    public Cliente(int id, Barbeiro barbeiro, TokenRing anel) {
+    public Cliente(int id, BarbeiroInterface barbeiro, TokenRingInterface anel) {
         this.idProcesso = id;
         this.barbeiro = barbeiro;
         this.anel = anel;
@@ -24,14 +25,14 @@ public class Cliente extends Thread {
     }
 
     private void tentarAcessarBarbeiro() throws InterruptedException, RemoteException {
-        // Espera que o cliente receba o token
+        //espera que o cliente receba o token
         while (!anel.possuiToken(idProcesso)) {
             Thread.sleep(100);
         }
         System.out.println("Cliente " + idProcesso + " está acessando o barbeiro.");
         realizarServico();
         System.out.println("Cliente " + idProcesso + " liberou o barbeiro.");
-        // Passa o token para o próximo cliente
+        //passa o token para o proximo cliente
         anel.passarToken();
     }
 
@@ -58,12 +59,10 @@ public class Cliente extends Thread {
 
     public static void main(String[] args) {
         try {
-            // Obtem o serviço remoto Barbeiro
-            Barbeiro barbeiro = (Barbeiro) Naming.lookup("rmi://localhost/BarbeiroService");
-            // Obtem o serviço remoto TokenRing
-            TokenRing anel = (TokenRing) Naming.lookup("rmi://localhost/TokenRingService");
+            BarbeiroInterface barbeiro = (BarbeiroInterface) Naming.lookup("rmi://localhost:1099/BarbeiroService");
+            TokenRingInterface anel = (TokenRingInterface) Naming.lookup("rmi://localhost:1099/TokenRingService");
 
-            // Inicia 5 clientes
+            //inicia 5 clientes
             for (int i = 0; i < 5; i++) {
                 new Cliente(i, barbeiro, anel).start();
             }
